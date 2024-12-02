@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: {{secrets.namespace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      affinity: # Rättad stavning
+      terminationGracePeriodSeconds: 30 # Rättad stavning
+      containers:
+        - name: mysql
+          image: mysql
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "hejsan123"
+          volumeMounts:
+            - name: mysqldb
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysqldb
+          persistentVolumeClaim:
+            claimName: pvc-mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqlserver1
+  namespace: {{secrets.namespace}}
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  type: ClusterIP

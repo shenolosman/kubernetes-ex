@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockersite
+  namespace: {{secrets.namespace}}
+  labels:
+    app: dockersite
+spec: # Flytta spec här, inte under metadata
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dockersite
+  template:
+    metadata:
+      labels:
+        app: dockersite
+    spec:
+      containers:
+        - name: dockersite
+          image: shenolosman/gocrudapitest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: RUNENVIRONMENT
+              value: Production
+      imagePullSecrets:
+        - name: regcred
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dockersite-service
+  namespace: {{secrets.namespace}}
+  labels:
+    app: dockersite
+spec: # Flytta spec här
+  type: LoadBalancer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  selector:
+    app: dockersite
+  sessionAffinity: None

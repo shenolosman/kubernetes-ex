@@ -1,0 +1,9 @@
+kubectl --kubeconfig=./kubeconfig.yaml exec  -it [mysql-with-id] sh --namespace=[namespace]
+mysql -p
+password
+create database [DbName];
+
+check with= show databases;
+exit
+exit
+
