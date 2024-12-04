@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dockersite
+  name: staticwebstite
   namespace: {{secrets.namespace}}
   labels:
-    app: dockersite
+    app: staticwebstite
 spec: # Flytta spec här, inte under metadata
   replicas: 3
   selector:
     matchLabels:
-      app: dockersite
+      app: staticwebstite
   template:
     metadata:
       labels:
-        app: dockersite
+        app: staticwebstite
     spec:
       containers:
-        - name: dockersite
+        - name: staticwebstite
           image: shenolosman/gocrudapitest
           ports:
             - containerPort: 8080
@@ -31,10 +31,10 @@ spec: # Flytta spec här, inte under metadata
 apiVersion: v1
 kind: Service
 metadata:
-  name: dockersite-service
+  name: staticwebserver-service
   namespace: {{secrets.namespace}}
   labels:
-    app: dockersite
+    app: staticwebstite
 spec: # Flytta spec här
   type: ClusterIP
   ports:
@@ -43,5 +43,5 @@ spec: # Flytta spec här
       port: 80
       targetPort: 8080
   selector:
-    app: dockersite
+    app: staticwebstite
   sessionAffinity: None
