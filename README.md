@@ -17,7 +17,7 @@
 - kubectl describe service [dockername]-service -n [namespaceName]
 
 
--kubectl rollout restart -n [namespaceName] deployment [dockername]
+-kubectl --kubeconfig=./kubeconfig.yaml rollout restart -n [namespaceName] deployment [dockername]
 
 for creating new secret regcred =>
 
