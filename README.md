@@ -28,3 +28,6 @@ for creating new secret regcred =>
 
 to delete replicaset:
 - kubectl delete -n [namespaceName] replicaset [name-with-id]
+
+
+kubectl --kubeconfig=./kubeconfig.yaml  -n keel get pods
