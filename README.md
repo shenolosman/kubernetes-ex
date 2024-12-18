@@ -32,3 +32,5 @@ to delete replicaset:
 
 
 kubectl --kubeconfig=./kubeconfig.yaml  -n keel get pods
+
+### crontab for cronjob in linux vms
