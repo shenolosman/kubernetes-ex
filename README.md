@@ -16,9 +16,10 @@
 - kubectl describe deployment [dockername] -n [namespaceName]
 - kubectl describe service [dockername]-service -n [namespaceName]
 
-
+# without keen.sh need to be writing this restart command for new code changes but if you have keen installed you dont need
 -kubectl --kubeconfig=./kubeconfig.yaml rollout restart -n [namespaceName] deployment [dockername]
 
+# can also be checked from skapasecret.txt file
 for creating new secret regcred =>
 
 - kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=<ditt-användarnamn> --docker-password=<ditt-lösenord> --docker-email=<din-epost> -n [namespaceName]
